@@ -2,7 +2,6 @@ package com.yungert.treinplanner.presentation.ui.model
 
 import androidx.annotation.Keep
 import com.yungert.treinplanner.presentation.Data.models.Message
-import com.yungert.treinplanner.presentation.Data.models.NesProperties
 import com.yungert.treinplanner.presentation.Data.models.TransferMessage
 
 @Keep
@@ -12,6 +11,7 @@ data class DetailReisadvies(
     var rit: List<RitDetail>,
     val hoofdBericht: String?,
     var eindTijdVerstoring: String,
+    var dataEindStation: DataEindbestemmingStation?
 )
 
 @Keep
@@ -46,22 +46,18 @@ data class RitDetail(
     val crossPlatform: Boolean,
     val overstapMogelijk: Boolean,
     val overstapTijd: String?,
-    val opgeheven: Boolean
+    val opgeheven: Boolean,
+
+    )
+
+@Keep
+data class DataEindbestemmingStation(
+    var ovFiets: List<OvFiets>?,
+    val ritPrijsInEuro: String,
 )
 
 @Keep
-data class MessageData(
-    val id: String,
-    val externalId: String,
-    val head: String,
-    val text: String,
-    val lead: String,
-    val routeIdxFrom: Int,
-    val routeIdxTo: Int,
-    val type: String,
-    val nesProperties: NesProperties,
-    val startDate: String,
-    val endDate: String,
-    val startTime: String,
-    val endTime: String
+data class OvFiets(
+    val aantalOvFietsen: String,
+    val locatieFietsStalling: String,
 )

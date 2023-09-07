@@ -110,7 +110,7 @@ class ReisAdviesViewModel : ViewModel() {
                                     treinSoortenOpRit = treinSoort,
                                     alternatiefVervoer = TripStatus.fromValue(advies.status) == TripStatus.ALTERNATIVE_TRANSPORT,
                                     primaryMessage = advies.primaryMessage,
-                                    eindTijdverstoring = eindTijd
+                                    eindTijdverstoring = eindTijd,
                                 )
                             )
                         }

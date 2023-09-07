@@ -79,7 +79,7 @@ fun MaterieelInzetComposable(ritDetail: TreinRitDetail) {
                     text = materieel.treinNummer,
                     style = fontsizeLabelCard
                 )
-                if (index < (ritDetail.materieelInzet.size?.minus(1) ?: 0)) {
+                if (index < ritDetail.materieelInzet.size.minus(1)) {
                     Text(
                         text = ", ",
                         style = fontsizeLabelCard

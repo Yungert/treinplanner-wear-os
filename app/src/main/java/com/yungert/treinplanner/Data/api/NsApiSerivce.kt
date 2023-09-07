@@ -2,6 +2,7 @@ package com.yungert.treinplanner.presentation.Data.api
 
 import androidx.annotation.Keep
 import com.yungert.treinplanner.data.models.DisruptionResponseModel
+import com.yungert.treinplanner.data.models.OvFietsResponseModel
 import com.yungert.treinplanner.presentation.Data.models.PlaceResponse
 import com.yungert.treinplanner.presentation.Data.models.ReisAdviesApiResponse
 import com.yungert.treinplanner.presentation.Data.models.RitDetailApiResponse
@@ -51,4 +52,10 @@ interface NSApiService {
         @Query("id") disruptionId: String,
         @Header("Ocp-Apim-Subscription-Key") authToken: String
     ): Response<List<DisruptionResponseModel>>
+
+    @GET("places-api/v2/ovfiets/")
+    suspend fun getOvFietsByStationId(
+        @Query("station_code") stationId: String,
+        @Header("Ocp-Apim-Subscription-Key") authToken: String
+    ): Response<OvFietsResponseModel>
 }

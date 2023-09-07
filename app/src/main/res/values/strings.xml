@@ -47,4 +47,7 @@
     <string name="label_verwachte_eindtijd">Verwachte eindtijd</string>
     <string name="label_cross_platform_overstap">Overstap is op zelfde perron</string>
     <string name="label_overstap_niet_mogelijk">Overstap niet mogelijk</string>
+    <string name="label_geen_reisadviezen_gevonden">Geen reisadviezen gevonden</string>
+    <string name="label_ov_fiets">OV fiets</string>
+    <string name="label_geen_ov_fiets">Geen OV fiets beschikbaar</string>
 </resources>

@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.gestures.scrollBy
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.pullrefresh.PullRefreshIndicator
 import androidx.compose.material.pullrefresh.pullRefresh
@@ -28,6 +30,7 @@ import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
@@ -46,6 +49,7 @@ import com.yungert.treinplanner.presentation.ui.ViewModel.ViewStateDetailReisadv
 import com.yungert.treinplanner.presentation.ui.model.DetailReisadvies
 import com.yungert.treinplanner.presentation.utils.Foutmelding
 import com.yungert.treinplanner.presentation.utils.LoadingScreen
+import com.yungert.treinplanner.ui.view.detailReisadvies.composables.DataEindStationComposable
 import com.yungert.treinplanner.ui.view.detailReisadvies.composables.OverstapComposable
 import com.yungert.treinplanner.ui.view.detailReisadvies.composables.OverstapOnbekendComposable
 import com.yungert.treinplanner.ui.view.detailReisadvies.composables.PrimaryMessageComposable
@@ -234,6 +238,15 @@ fun DisplayDetailReisAdvies(
                             }
                         )
                     }
+
+                }
+                item {
+                    treinRit.dataEindStation?.let { DataEindStationComposable(it) }
+                }
+                item {
+                    Column(
+                        modifier = Modifier.padding(bottom = 20.dp)
+                    ) {}
                 }
             }
             PullRefreshIndicator(

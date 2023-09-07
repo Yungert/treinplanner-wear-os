@@ -235,22 +235,6 @@ data class Styles(
 )
 
 @Keep
-data class RouteResponse(
-    val fareRoute: FareRoute,
-    val fares: List<Fare>,
-    val fareLegs: List<FareLeg>,
-    val productFare: Fare,
-    val fareOptions: FareOptions,
-    val nsiLink: NsiLink,
-    val type: String,
-    val shareUrl: ShareUrl,
-    val realtime: Boolean,
-    val routeId: String,
-    val registerJourney: RegisterJourney,
-    val modalityListItems: List<ModalityListItem>
-)
-
-@Keep
 data class RegisterJourney(
     val url: String,
     val searchUrl: String,

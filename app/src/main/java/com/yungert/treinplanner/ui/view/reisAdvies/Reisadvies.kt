@@ -232,6 +232,15 @@ fun DisplayReisadvies(
                     )
                 }
 
+                if (reisAdviezen.advies.isEmpty()) {
+                    item {
+                        Text(
+                            text = stringResource(id = R.string.label_geen_reisadviezen_gevonden),
+                            textAlign = TextAlign.Center,
+                        )
+                    }
+                }
+
                 reisAdviezen.advies.forEachIndexed { index, advies ->
                     item {
                         ReisAdviesCardComposable(

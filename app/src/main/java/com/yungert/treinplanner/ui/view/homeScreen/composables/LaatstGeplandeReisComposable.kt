@@ -31,7 +31,7 @@ fun LaatstGeplandeReisComposable(
             .clickable {
                 navController.navigate(
                     Screen.Reisadvies.withArguments(
-                        route!!.vertrekStation,
+                        route.vertrekStation,
                         route.aankomstStation
                     )
                 )
@@ -69,7 +69,7 @@ fun LaatstGeplandeReisComposable(
                     .fillMaxSize()
             ) {
                 Text(
-                    text = route!!.vertrekStation,
+                    text = route.vertrekStation,
                     style = fontsizeLabelCard,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis
@@ -98,7 +98,7 @@ fun LaatstGeplandeReisComposable(
                     .fillMaxSize()
             ) {
                 Text(
-                    text = route!!.aankomstStation,
+                    text = route.aankomstStation,
                     style = fontsizeLabelCard,
                     maxLines = 1,
                     overflow = TextOverflow.Ellipsis

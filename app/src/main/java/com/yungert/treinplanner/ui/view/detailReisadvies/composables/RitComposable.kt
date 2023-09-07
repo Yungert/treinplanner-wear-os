@@ -35,7 +35,7 @@ fun RitComposable(
             )
             onClick(index + extraItem)
         },
-        modifier = if (index == aantalRitten - 1) Modifier.padding(bottom = 40.dp) else Modifier
+        modifier = Modifier
             .padding(
                 bottom = 0.dp,
             )

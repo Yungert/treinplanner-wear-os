@@ -46,4 +46,7 @@
     <string name="label_verwachte_eindtijd">Expected end time</string>
     <string name="label_cross_platform_overstap">Transfer on same platform</string>
     <string name="label_overstap_niet_mogelijk">Transfer not possible</string>
+    <string name="label_geen_reisadviezen_gevonden">No possible trips found</string>
+    <string name="label_ov_fiets">OV bicycles</string>
+    <string name="label_geen_ov_fiets">No OV bicycle available</string>
 </resources>
