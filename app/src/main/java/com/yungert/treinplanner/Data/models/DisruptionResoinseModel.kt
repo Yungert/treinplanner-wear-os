@@ -1,5 +1,8 @@
-package com.yungert.treinplanner.Data.models
+package com.yungert.treinplanner.data.models
 
+import androidx.annotation.Keep
+
+@Keep
 data class DisruptionResponseModel(
     val id: String,
     val type: String,
@@ -21,42 +24,50 @@ data class DisruptionResponseModel(
     val alternativeTransportTimespans: List<AlternativeTransportTimespans>
 )
 
+@Keep
 data class TitleSection(
     val type: String,
     val value: String
 )
 
+@Keep
 data class Phase(
     val id: String,
     val label: String
 )
 
+@Keep
 data class Impact(
     val value: Int
 )
 
+@Keep
 data class ExpectedDuration(
     val description: String,
     val endTime: String
 )
 
+@Keep
 data class SummaryAdditionalTravelTime(
     val label: String,
     val shortLabel: String,
     val maximumDurationInMinutes: Int
 )
 
+@Keep
 data class PublicationSection(
     val section: Section,
     val consequence: Consequence,
     val sectionType: String
 )
 
+@Keep
 data class Section(
     val stations: List<Station>,
     val direction: String
 )
 
+@Keep
 data class Station(
     val uicCode: String,
     val stationCode: String,
@@ -65,17 +76,20 @@ data class Station(
     val countryCode: String
 )
 
+@Keep
 data class Coordinate(
     val lat: Double,
     val lng: Double
 )
 
+@Keep
 data class Consequence(
     val section: Section,
     val description: String,
     val level: String
 )
 
+@Keep
 data class Timespan(
     val start: String,
     val end: String,
@@ -85,13 +99,17 @@ data class Timespan(
     val advices: List<String>
 )
 
+@Keep
 data class Situation(
     val label: String
 )
 
+@Keep
 data class Cause(
     val label: String
 )
+
+@Keep
 data class AlternativeTransportTimespans(
     val required: List<String>,
     val type: String,
@@ -99,24 +117,28 @@ data class AlternativeTransportTimespans(
     val description: String
 )
 
+@Keep
 data class TimespanProperties(
     val start: StartProperty,
     val end: EndProperty,
     val alternativeTransport: AlternativeTransportProperty
 )
 
+@Keep
 data class StartProperty(
     val type: String,
     val description: String,
     val format: String
 )
 
+@Keep
 data class EndProperty(
     val type: String,
     val description: String,
     val format: String
 )
 
+@Keep
 data class AlternativeTransportProperty(
     val `$ref`: String
 )

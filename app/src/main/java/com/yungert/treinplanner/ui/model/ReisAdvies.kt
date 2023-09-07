@@ -6,8 +6,7 @@ import com.yungert.treinplanner.presentation.Data.models.PrimaryMessage
 import com.yungert.treinplanner.presentation.utils.TripStatus
 
 @Keep
-data class ReisAdvies(
-
+data class Reisadvies(
     val advies: List<Adviezen>,
     val verstrekStation: String,
     val aankomstStation: String,

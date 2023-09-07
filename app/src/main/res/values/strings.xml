@@ -29,7 +29,7 @@
     <string name="laadt_text_station_ophalen">Stations ophalen</string>
     <string name="laadt_text_rit_gegevens">Rit gegevens ophalen</string>
     <string name="laadt_resiadviezen">Reisadviezen ophalen</string>
-    <string name="label_vervallen_reisadvies">Reisadvies vervalt</string>
+    <string name="label_reisadvies_niet_mogelijk">Reisadvies niet mogelijk</string>
     <string name="label_laatst_geplande_reis">Laatst gepland</string>
     <string name="label_opniew_plannen">Andere reis plannen</string>
     <string name="error_geen_internet">Geen internet verbinding, gegevens konden niet worden opgehaald</string>
@@ -45,4 +45,6 @@
     <string name="label_trein_gecombineerd">Er wordt hier een treinstel aangekoppeld</string>
     <string name="label_trein_split">Trein wordt gesplitst</string>
     <string name="label_verwachte_eindtijd">Verwachte eindtijd</string>
+    <string name="label_cross_platform_overstap">Overstap is op zelfde perron</string>
+    <string name="label_overstap_niet_mogelijk">Overstap niet mogelijk</string>
 </resources>

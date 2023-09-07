@@ -1,7 +1,7 @@
 package com.yungert.treinplanner.presentation.Data.api
 
 import androidx.annotation.Keep
-import com.yungert.treinplanner.Data.models.DisruptionResponseModel
+import com.yungert.treinplanner.data.models.DisruptionResponseModel
 import com.yungert.treinplanner.presentation.Data.models.PlaceResponse
 import com.yungert.treinplanner.presentation.Data.models.ReisAdviesApiResponse
 import com.yungert.treinplanner.presentation.Data.models.RitDetailApiResponse

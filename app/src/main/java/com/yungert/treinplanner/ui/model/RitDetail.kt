@@ -32,7 +32,7 @@ data class StopOpRoute(
 )
 
 data class MaterieelInzet(
-    var treinNummer : String,
+    var treinNummer: String,
     var eindBestemmingTreindeel: String
 )
 

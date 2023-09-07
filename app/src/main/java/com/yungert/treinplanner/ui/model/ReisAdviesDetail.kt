@@ -5,13 +5,15 @@ import com.yungert.treinplanner.presentation.Data.models.Message
 import com.yungert.treinplanner.presentation.Data.models.NesProperties
 import com.yungert.treinplanner.presentation.Data.models.TransferMessage
 
-data class DetailReisAdvies(
+@Keep
+data class DetailReisadvies(
     var opgeheven: Boolean,
     var redenOpheffen: String?,
     var rit: List<RitDetail>,
     val hoofdBericht: String?,
     var eindTijdVerstoring: String,
 )
+
 @Keep
 data class RitDetail(
     val treinOperator: String,
@@ -41,9 +43,12 @@ data class RitDetail(
     val alternatiefVervoer: Boolean,
     val ritId: String,
 
+    val crossPlatform: Boolean,
+    val overstapMogelijk: Boolean,
     val overstapTijd: String?,
     val opgeheven: Boolean
 )
+
 @Keep
 data class MessageData(
     val id: String,

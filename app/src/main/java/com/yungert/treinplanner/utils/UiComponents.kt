@@ -227,18 +227,18 @@ fun DrukteIndicatorFormatter(forecast: String?, compactLayout: Boolean? = false)
     var color = Color.Gray
     var aantal = 1
     when (forecast) {
-        CrowdForecast.rustig.value -> {
+        CrowdForecast.LOW.value -> {
             icon = Icons.Default.Person
             color = Color.Green
         }
 
-        CrowdForecast.gemiddeld.value -> {
+        CrowdForecast.MEDIUM.value -> {
             icon = Icons.Default.Person
             color = Color.Yellow
             aantal = 2
         }
 
-        CrowdForecast.druk.value -> {
+        CrowdForecast.HIGH.value -> {
             icon = Icons.Default.Person
             color = Color.Red
             aantal = 3
@@ -247,7 +247,7 @@ fun DrukteIndicatorFormatter(forecast: String?, compactLayout: Boolean? = false)
     return DrukteIndicator(
         icon = icon,
         color = color,
-        aantalIconen = if(!compactLayout!!) aantal else 1,
+        aantalIconen = if (!compactLayout!!) aantal else 1,
     )
 }
 

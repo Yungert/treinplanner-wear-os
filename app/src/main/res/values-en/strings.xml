@@ -28,7 +28,7 @@
     <string name="laadt_text_station_ophalen">Retrieve stations</string>
     <string name="laadt_text_rit_gegevens">Retrieve trip information</string>
     <string name="laadt_resiadviezen">Retrieve travel options</string>
-    <string name="label_vervallen_reisadvies">Journey not possible</string>
+    <string name="label_reisadvies_niet_mogelijk">Journey not possible</string>
     <string name="label_laatst_geplande_reis">Last planned</string>
     <string name="label_opniew_plannen">Plan another journey</string>
     <string name="error_geen_internet">No internet connection, data could not be retrieved</string>
@@ -44,4 +44,6 @@
     <string name="label_trein_gecombineerd">A train set is connected here</string>
     <string name="label_trein_split">train will be split</string>
     <string name="label_verwachte_eindtijd">Expected end time</string>
+    <string name="label_cross_platform_overstap">Transfer on same platform</string>
+    <string name="label_overstap_niet_mogelijk">Transfer not possible</string>
 </resources>

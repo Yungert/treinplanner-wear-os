@@ -2,6 +2,7 @@ package com.yungert.treinplanner.presentation.Data.models
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
+
 @Keep
 data class PlaceResponse(
     @SerializedName("payload")
@@ -29,6 +30,7 @@ data class Data(
     @SerializedName("infoImages")
     val infoImages: List<String>?
 )
+
 @Keep
 data class Locatie(
     @SerializedName("distance")
@@ -74,6 +76,7 @@ data class Locatie(
     @SerializedName("EVACode")
     val evaCode: String?
 )
+
 @Keep
 data class Site(
     @SerializedName("qualifier")
@@ -81,6 +84,7 @@ data class Site(
     @SerializedName("url")
     val url: String?
 )
+
 @Keep
 data class Namen(
     @SerializedName("middel")

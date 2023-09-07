@@ -10,6 +10,7 @@ data class ReisAdviesApiResponse(
     val scrollRequestForwardContext: String,
     val message: String
 )
+
 @Keep
 data class TripDetail(
     val uid: String,
@@ -41,6 +42,7 @@ data class TripDetail(
     val eco: Eco,
     val modalityListItems: List<ModalityListItem>
 )
+
 @Keep
 data class Message(
     val id: String,
@@ -58,6 +60,7 @@ data class Message(
     val endTime: String,
     val phase: String
 )
+
 @Keep
 data class Leg(
     val idx: String,
@@ -75,7 +78,7 @@ data class Leg(
     val sharedModality: SharedModality,
     val notes: List<Note>,
     val messages: List<Message>,
-    val transferMessages: List<TransferMessage>,
+    val transferMessages: List<TransferMessage>?,
     val stops: List<Stop>,
     val steps: List<Step>,
     val coordinates: List<List<Double>>,
@@ -95,11 +98,13 @@ data class Leg(
     val overviewPolyLine: List<Coordinate>,
     val nesProperties: NesProperties
 )
+
 @Keep
 data class Coordinate(
     val lat: Double,
     val lng: Double
 )
+
 @Keep
 data class Location(
     val name: String,
@@ -123,6 +128,7 @@ data class Location(
     val notes: List<Note>,
     val quayCode: String
 )
+
 @Keep
 data class Product(
     val number: String,
@@ -136,6 +142,7 @@ data class Product(
     val displayName: String,
     val nesProperties: NesProperties
 )
+
 @Keep
 data class SharedModality(
     val provider: String,
@@ -144,6 +151,7 @@ data class SharedModality(
     val nearByMeMapping: String,
     val planIcon: String
 )
+
 @Keep
 data class FareLegStop(
     val name: String,
@@ -154,6 +162,7 @@ data class FareLegStop(
     val stationCode: String,
     val type: String
 )
+
 @Keep
 data class Fare(
     val priceInCents: Int,
@@ -161,6 +170,7 @@ data class Fare(
     val travelClass: String,
     val discountType: String
 )
+
 @Keep
 data class FareLeg(
     val origin: FareLegStop,
@@ -169,12 +179,14 @@ data class FareLeg(
     val productTypes: List<String>,
     val fares: List<Fare>
 )
+
 @Keep
 data class FareRoute(
     val routeId: String,
     val origin: FareLegStop,
     val destination: FareLegStop
 )
+
 @Keep
 data class FareOptions(
     val isInternationalBookable: Boolean,
@@ -183,15 +195,18 @@ data class FareOptions(
     val isPossibleWithOvChipkaart: Boolean,
     val isTotalPriceUnknown: Boolean
 )
+
 @Keep
 data class NsiLink(
     val url: String,
     val showInternationalBanner: Boolean
 )
+
 @Keep
 data class ShareUrl(
     val uri: String
 )
+
 @Keep
 data class ModalityListItem(
     val name: String,
@@ -200,21 +215,25 @@ data class ModalityListItem(
     val actualTrack: String,
     val accessibilityName: String
 )
+
 @Keep
 data class NameNesProperties(
     val color: String,
     val styles: Styles
 )
+
 @Keep
 data class IconNesProperties(
     val color: String,
     val icon: String
 )
+
 @Keep
 data class Styles(
     val type: String,
     val strikethrough: Boolean
 )
+
 @Keep
 data class RouteResponse(
     val fareRoute: FareRoute,
@@ -230,6 +249,7 @@ data class RouteResponse(
     val registerJourney: RegisterJourney,
     val modalityListItems: List<ModalityListItem>
 )
+
 @Keep
 data class RegisterJourney(
     val url: String,
@@ -237,17 +257,20 @@ data class RegisterJourney(
     val status: String,
     val bicycleReservationRequired: Boolean
 )
+
 @Keep
 data class NesProperties(
     val color: String,
     val scope: String,
     val styles: LineStyles
 )
+
 @Keep
 data class LineStyles(
     val type: String,
     val dashed: Boolean
 )
+
 @Keep
 data class Note(
     val value: String?,
@@ -261,21 +284,25 @@ data class Note(
     val isPresentationRequired: Boolean,
     val category: String
 )
+
 @Keep
 data class Link(
     val title: String?,
     val href: String?
 )
+
 @Keep
 data class TravelAssistanceInfo(
     val termsAndConditionsLink: String?,
     val tripRequestId: Int,
     val isAssistanceRequired: Boolean
 )
+
 @Keep
 data class Eco(
     val co2kg: Double
 )
+
 @Keep
 data class TransferMessage(
     val message: String,
@@ -283,10 +310,12 @@ data class TransferMessage(
     val type: String,
     val messageNesProperties: MessageNesProperties
 )
+
 @Keep
 data class MessageNesProperties(
     val color: String
 )
+
 @Keep
 data class Detail(
     val type: String,
@@ -297,6 +326,7 @@ data class Detail(
 data class JourneyLink(
     val uri: String
 )
+
 @Keep
 data class StopNote(
     val value: String,
@@ -304,6 +334,7 @@ data class StopNote(
     val type: String,
     val priority: Int
 )
+
 @Keep
 data class Stop(
     val uicCode: String?,
@@ -336,6 +367,7 @@ data class Stop(
     val passing: Boolean?,
     val quayCode: String?
 )
+
 @Keep
 data class Step(
     val distanceInMeters: Int,
@@ -344,6 +376,7 @@ data class Step(
     val endLocation: Location,
     val instructions: String
 )
+
 @Keep
 data class StationReference(
     val uicCode: String,
@@ -352,6 +385,7 @@ data class StationReference(
     val coordinate: Coordinate?,
     val countryCode: String
 )
+
 @Keep
 data class PrimaryMessage(
     val title: String,

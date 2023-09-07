@@ -9,11 +9,11 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.yungert.treinplanner.presentation.ui.ComposeStaions
 import com.yungert.treinplanner.presentation.ui.HomeScreen
-import com.yungert.treinplanner.presentation.ui.ShowDetailReisAdvies
+import com.yungert.treinplanner.presentation.ui.ShowDetailReisadvies
 import com.yungert.treinplanner.presentation.ui.ShowGpsPermisson
 import com.yungert.treinplanner.presentation.ui.ShowReisAdvies
 import com.yungert.treinplanner.presentation.ui.ShowRitDetail
-import com.yungert.treinplanner.presentation.ui.ViewModel.DetailReisAdviesViewModel
+import com.yungert.treinplanner.presentation.ui.ViewModel.DetailReisadviesViewModel
 import com.yungert.treinplanner.presentation.ui.ViewModel.HomeScreenViewModel
 import com.yungert.treinplanner.presentation.ui.ViewModel.ReisAdviesViewModel
 import com.yungert.treinplanner.presentation.ui.ViewModel.RitDetailViewModel
@@ -93,8 +93,8 @@ fun Navigation() {
 
             )
         ) { entry ->
-            var viewmodel: DetailReisAdviesViewModel = viewModel()
-            ShowDetailReisAdvies(
+            var viewmodel: DetailReisadviesViewModel = viewModel()
+            ShowDetailReisadvies(
                 reisAdviesId = entry.arguments?.getString("reisadviesId") ?: "",
                 viewModel = viewmodel,
                 navController = navController

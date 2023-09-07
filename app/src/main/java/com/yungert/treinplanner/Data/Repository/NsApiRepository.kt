@@ -2,7 +2,7 @@ package com.yungert.treinplanner.presentation.Data.Repository
 
 import androidx.annotation.Keep
 import com.yungert.treinplanner.BuildConfig
-import com.yungert.treinplanner.Data.models.DisruptionResponseModel
+import com.yungert.treinplanner.data.models.DisruptionResponseModel
 import com.yungert.treinplanner.presentation.Data.api.NSApiClient
 import com.yungert.treinplanner.presentation.Data.api.Resource
 import com.yungert.treinplanner.presentation.Data.models.PlaceResponse
@@ -121,7 +121,10 @@ class NsApiRepository(private val nsApiClient: NSApiClient) {
         return flow {
             emit(Resource.Loading())
             try {
-                val apiResult = nsApiClient.apiService.getDisruptionById(disruptionId = disruptionId, authToken = apiKey)
+                val apiResult = nsApiClient.apiService.getDisruptionById(
+                    disruptionId = disruptionId,
+                    authToken = apiKey
+                )
                 if (apiResult.isSuccessful) {
                     if (apiResult.body()?.getOrNull(0) != null) {
                         emit(Resource.Success(apiResult.body()?.get(0)!!))

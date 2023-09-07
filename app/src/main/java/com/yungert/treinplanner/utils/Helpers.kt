@@ -3,9 +3,6 @@ package com.yungert.treinplanner.presentation.utils
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.res.stringResource
-import com.yungert.treinplanner.R
 import java.time.Duration
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
@@ -101,8 +98,4 @@ fun hasInternetConnection(context: Context): Boolean {
     val currentNetwork = connectivityManager.activeNetwork
     val capabilities = connectivityManager.getNetworkCapabilities(currentNetwork)
     return capabilities?.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET) ?: false
-}
-@Composable
-fun getUitvalRitText():String{
-    return stringResource(id = R.string.label_vervallen_reisadvies)
 }
