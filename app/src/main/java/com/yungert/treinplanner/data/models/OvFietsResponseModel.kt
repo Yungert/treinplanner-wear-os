@@ -1,9 +1,10 @@
 package com.yungert.treinplanner.data.models
 
+import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
 import com.yungert.treinplanner.presentation.Data.models.Link
 
-
+@Keep
 data class OvFietsResponseModel(
     @SerializedName("links")
     val links: Link,
@@ -11,7 +12,7 @@ data class OvFietsResponseModel(
     @SerializedName("payload")
     val payload: List<Location>,
 )
-
+@Keep
 data class Location(
     @SerializedName("type")
     val type: String,
@@ -49,7 +50,7 @@ data class Location(
     @SerializedName("headerImage")
     val headerImage: ImageItem,
 )
-
+@Keep
 data class LocationItem(
     @SerializedName("distance")
     val distance: Double,
@@ -105,17 +106,17 @@ data class LocationItem(
     @SerializedName("ovFiets")
     val ovFiets: Boolean
 )
-
+@Keep
 data class LinkItem(
     @SerializedName("uri")
     val uri: String
 )
-
+@Keep
 data class ImageItem(
     @SerializedName("uri")
     val uri: String
 )
-
+@Keep
 data class OpeningHoursItem(
     @SerializedName("dayOfWeek")
     val dayOfWeek: Int,
@@ -129,7 +130,7 @@ data class OpeningHoursItem(
     @SerializedName("closesNextDay")
     val closesNextDay: Boolean
 )
-
+@Keep
 data class Extra(
     @SerializedName("serviceType")
     val serviceType: String,
@@ -143,7 +144,7 @@ data class Extra(
     @SerializedName("type")
     val type: String
 )
-
+@Keep
 data class InfoImage(
     @SerializedName("name")
     val name: String,
@@ -154,7 +155,7 @@ data class InfoImage(
     @SerializedName("body")
     val body: String
 )
-
+@Keep
 data class NearbyMeLocationId(
     @SerializedName("value")
     val value: String,
