@@ -12,6 +12,7 @@ data class OvFietsResponseModel(
     @SerializedName("payload")
     val payload: List<Location>,
 )
+
 @Keep
 data class Location(
     @SerializedName("type")
@@ -50,6 +51,7 @@ data class Location(
     @SerializedName("headerImage")
     val headerImage: ImageItem,
 )
+
 @Keep
 data class LocationItem(
     @SerializedName("distance")
@@ -106,16 +108,19 @@ data class LocationItem(
     @SerializedName("ovFiets")
     val ovFiets: Boolean
 )
+
 @Keep
 data class LinkItem(
     @SerializedName("uri")
     val uri: String
 )
+
 @Keep
 data class ImageItem(
     @SerializedName("uri")
     val uri: String
 )
+
 @Keep
 data class OpeningHoursItem(
     @SerializedName("dayOfWeek")
@@ -130,6 +135,7 @@ data class OpeningHoursItem(
     @SerializedName("closesNextDay")
     val closesNextDay: Boolean
 )
+
 @Keep
 data class Extra(
     @SerializedName("serviceType")
@@ -144,6 +150,7 @@ data class Extra(
     @SerializedName("type")
     val type: String
 )
+
 @Keep
 data class InfoImage(
     @SerializedName("name")
@@ -155,6 +162,7 @@ data class InfoImage(
     @SerializedName("body")
     val body: String
 )
+
 @Keep
 data class NearbyMeLocationId(
     @SerializedName("value")

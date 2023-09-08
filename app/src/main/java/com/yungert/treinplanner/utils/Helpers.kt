@@ -4,8 +4,12 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import java.time.Duration
+import java.time.LocalDate
 import java.time.OffsetDateTime
 import java.time.format.DateTimeFormatter
+import java.time.format.TextStyle
+import java.util.Locale
+
 
 private var lastFormattedTime: String? = null
 fun formatTime(time: String?): String {
@@ -20,11 +24,19 @@ fun formatTime(time: String?): String {
         OffsetDateTime.parse(modifiedTimestamp, DateTimeFormatter.ISO_OFFSET_DATE_TIME)
 
 
-    val localTime = offsetDateTime.toLocalTime()
+    val endTime = offsetDateTime.toLocalTime()
+    val endDate = offsetDateTime.toLocalDate()
+    val localDate = LocalDate.now()
+    val formattedEndTime = endTime.format(DateTimeFormatter.ofPattern("HH:mm"))
+    if (endDate != localDate) {
+        return endDate.dayOfMonth.toString() + " " + endDate.month.getDisplayName(
+            TextStyle.FULL,
+            Locale.getDefault()
+        ) + " " + endDate.year + " " + formattedEndTime
+    }
 
-    val formattedTime = localTime.format(DateTimeFormatter.ofPattern("HH:mm"))
-    lastFormattedTime = formattedTime
-    return formattedTime
+    lastFormattedTime = formattedEndTime
+    return formattedEndTime
 }
 
 fun formatTravelTime(duratinInMinutes: Int): String {

@@ -107,6 +107,7 @@ enum class PrimaryMessageType(val value: String) {
 enum class MessageType(val value: String) {
     MAINTENANCE("MAINTENANCE"),
     DISRUPTION("DISRUPTION"),
+    CALAMITY("CALAMITY"),
     UNKNOWM("UNKNOWM");
 
     companion object {

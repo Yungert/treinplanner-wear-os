@@ -11,7 +11,6 @@ import com.yungert.treinplanner.presentation.ui.model.DataEindbestemmingStation
 import com.yungert.treinplanner.presentation.ui.model.DetailReisadvies
 import com.yungert.treinplanner.presentation.ui.model.OvFiets
 import com.yungert.treinplanner.presentation.ui.model.RitDetail
-import com.yungert.treinplanner.presentation.utils.MessageType
 import com.yungert.treinplanner.presentation.utils.TransferType
 import com.yungert.treinplanner.presentation.utils.TripStatus
 import com.yungert.treinplanner.presentation.utils.calculateTimeDiff
@@ -64,7 +63,7 @@ class DetailReisadviesViewModel : ViewModel() {
                                     ovFiets.add(
                                         OvFiets(
                                             aantalOvFietsen = location.extra.rentalBikes,
-                                            locatieFietsStalling = if(location.street?.trim() != null && location.houseNumber != null) location.street.trim() + " " + location.houseNumber else location.description
+                                            locatieFietsStalling = if (location.street?.trim() != null && location.houseNumber != null) location.street.trim() + " " + location.houseNumber else location.description
                                         )
                                     )
                                 }
@@ -81,12 +80,12 @@ class DetailReisadviesViewModel : ViewModel() {
                             eindTijdVerstoring = eindTijd,
                             dataEindStation = dataEindbestemmingStation,
                         )
-                        if (MessageType.fromValue(result.data?.primaryMessage?.message?.type) == MessageType.DISRUPTION) {
-                            result.data?.primaryMessage?.message?.id?.let {
-                                nsApiRepository.fetchDisruptionById(it).collect { result ->
+
+                        result.data?.primaryMessage?.message?.id?.let { id ->
+                            result.data?.primaryMessage.message.type?.let { type ->
+                                nsApiRepository.fetchDisruptionById(id, type).collect { result ->
                                     detailReisAdvies.eindTijdVerstoring =
                                         formatTime(result.data?.expectedDuration?.endTime)
-
                                 }
                             }
                         }

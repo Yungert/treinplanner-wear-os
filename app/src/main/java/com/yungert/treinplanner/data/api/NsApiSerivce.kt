@@ -50,6 +50,7 @@ interface NSApiService {
     @GET("reisinformatie-api/api/v3/disruptions/")
     suspend fun getDisruptionById(
         @Query("id") disruptionId: String,
+        @Query("type") type: String,
         @Header("Ocp-Apim-Subscription-Key") authToken: String
     ): Response<List<DisruptionResponseModel>>
 

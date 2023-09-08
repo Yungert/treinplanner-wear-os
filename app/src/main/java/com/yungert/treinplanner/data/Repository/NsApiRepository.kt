@@ -118,12 +118,16 @@ class NsApiRepository(private val nsApiClient: NSApiClient) {
         }.flowOn(Dispatchers.IO)
     }
 
-    suspend fun fetchDisruptionById(disruptionId: String): Flow<Resource<DisruptionResponseModel>> {
+    suspend fun fetchDisruptionById(
+        disruptionId: String,
+        type: String
+    ): Flow<Resource<DisruptionResponseModel>> {
         return flow {
             emit(Resource.Loading())
             try {
                 val apiResult = nsApiClient.apiService.getDisruptionById(
                     disruptionId = disruptionId,
+                    type = type,
                     authToken = apiKey
                 )
                 if (apiResult.isSuccessful) {
