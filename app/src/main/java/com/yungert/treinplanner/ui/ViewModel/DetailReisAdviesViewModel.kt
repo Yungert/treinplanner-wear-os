@@ -64,7 +64,7 @@ class DetailReisadviesViewModel : ViewModel() {
                                     ovFiets.add(
                                         OvFiets(
                                             aantalOvFietsen = location.extra.rentalBikes,
-                                            locatieFietsStalling = location.street.trim() + " " + location.houseNumber
+                                            locatieFietsStalling = if(location.street?.trim() != null && location.houseNumber != null) location.street.trim() + " " + location.houseNumber else location.description
                                         )
                                     )
                                 }

@@ -95,13 +95,13 @@ data class LocationItem(
     val city: String,
 
     @SerializedName("houseNumber")
-    val houseNumber: String,
+    val houseNumber: String?,
 
     @SerializedName("postalCode")
     val postalCode: String,
 
     @SerializedName("street")
-    val street: String,
+    val street: String?,
 
     @SerializedName("ovFiets")
     val ovFiets: Boolean
