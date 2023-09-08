@@ -12,7 +12,7 @@ import java.util.Locale
 
 
 private var lastFormattedTime: String? = null
-fun formatTime(time: String?): String {
+fun formatTime(time: String?, rekeningHoudenMetDag: Boolean? = false): String {
     if (time == null || time == "") {
         return ""
     }
@@ -28,15 +28,16 @@ fun formatTime(time: String?): String {
     val endDate = offsetDateTime.toLocalDate()
     val localDate = LocalDate.now()
     val formattedEndTime = endTime.format(DateTimeFormatter.ofPattern("HH:mm"))
-    if (endDate != localDate) {
+    lastFormattedTime = formattedEndTime
+    if (endDate != localDate && rekeningHoudenMetDag == true) {
         return endDate.dayOfMonth.toString() + " " + endDate.month.getDisplayName(
             TextStyle.FULL,
             Locale.getDefault()
         ) + " " + endDate.year + " " + formattedEndTime
     }
-
-    lastFormattedTime = formattedEndTime
     return formattedEndTime
+
+
 }
 
 fun formatTravelTime(duratinInMinutes: Int): String {

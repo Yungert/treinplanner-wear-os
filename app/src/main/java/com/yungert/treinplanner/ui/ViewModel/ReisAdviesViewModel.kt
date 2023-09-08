@@ -67,7 +67,7 @@ class ReisAdviesViewModel : ViewModel() {
                                         .collect { result ->
                                             eindTijd = formatTime(
                                                 result.data?.expectedDuration?.endTime
-                                                    ?: result.data?.end
+                                                    ?: result.data?.end, rekeningHoudenMetDag = true
                                             )
                                         }
                                 }

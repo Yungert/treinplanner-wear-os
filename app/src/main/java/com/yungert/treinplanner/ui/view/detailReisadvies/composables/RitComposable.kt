@@ -29,7 +29,7 @@ fun RitComposable(
                 Screen.RitDetail.withArguments(
                     reis.vertrekStationUicCode,
                     reis.aankomstStationUicCode,
-                    reis.ritId,
+                    reis.ritNummer,
                     reis.datum
                 )
             )

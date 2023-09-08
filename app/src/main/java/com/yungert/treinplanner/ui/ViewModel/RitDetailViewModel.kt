@@ -61,7 +61,8 @@ class RitDetailViewModel : ViewModel() {
                             aantalTreinDelen = 0,
                             aantalZitplaatsen = 0,
                             materieelType = "",
-                            materieelInzet = emptyList()
+                            materieelInzet = emptyList(),
+                            note = result.data?.payload?.notes
                         )
                         var stopOpRoute = false
                         var ingezetMaterieel = mutableListOf<MaterieelInzet>()

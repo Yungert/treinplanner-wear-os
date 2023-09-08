@@ -47,6 +47,7 @@ import com.yungert.treinplanner.presentation.utils.LoadingScreen
 import com.yungert.treinplanner.ui.view.ritDetail.composables.MaterieelInzetComposable
 import com.yungert.treinplanner.ui.view.ritDetail.composables.RitInfoCompoasble
 import com.yungert.treinplanner.ui.view.ritDetail.composables.RitOpgehevenComposable
+import com.yungert.treinplanner.ui.view.ritDetail.composables.ShowNotesComposable
 import com.yungert.treinplanner.ui.view.ritDetail.composables.StopsComposable
 import kotlinx.coroutines.launch
 
@@ -208,6 +209,10 @@ fun DisplayRitDetail(
 
                 item {
                     MaterieelInzetComposable(ritDetail)
+                }
+
+                item {
+                    ShowNotesComposable(ritDetail.note)
                 }
 
                 treinStops.stops.forEachIndexed { index, stop ->

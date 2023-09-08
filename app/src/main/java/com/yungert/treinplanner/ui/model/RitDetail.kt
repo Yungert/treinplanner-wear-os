@@ -1,6 +1,7 @@
 package com.yungert.treinplanner.presentation.ui.model
 
 import androidx.annotation.Keep
+import com.yungert.treinplanner.presentation.Data.models.JourneyNote
 import com.yungert.treinplanner.presentation.utils.StopStatusType
 
 @Keep
@@ -14,6 +15,7 @@ data class TreinRitDetail(
     var ingekort: Boolean,
     var materieelInzet: List<MaterieelInzet>,
     val stops: List<StopOpRoute>,
+    val note: List<JourneyNote>?,
 )
 
 data class StopOpRoute(

@@ -10,6 +10,7 @@ import com.yungert.treinplanner.presentation.Data.models.TripDetail
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 @Keep
@@ -23,7 +24,7 @@ interface NSApiService {
 
     @GET("reisinformatie-api/api/v2/journey/")
     suspend fun getReis(
-        @Query("id") id: String,
+        @Query("train") id: String,
         @Query("departureUicCode") departureUicCode: String,
         @Query("arrivalUicCode") arrivalUicCode: String,
         @Query("dateTime") dateTime: String,
@@ -47,12 +48,12 @@ interface NSApiService {
         @Header("Ocp-Apim-Subscription-Key") authToken: String
     ): Response<PlaceResponse>
 
-    @GET("reisinformatie-api/api/v3/disruptions/")
+    @GET("reisinformatie-api/api/v3/disruptions/{type}/{id}")
     suspend fun getDisruptionById(
-        @Query("id") disruptionId: String,
-        @Query("type") type: String,
+        @Path("type") type: String,
+        @Path("id") disruptionId: String,
         @Header("Ocp-Apim-Subscription-Key") authToken: String
-    ): Response<List<DisruptionResponseModel>>
+    ): Response<DisruptionResponseModel>
 
     @GET("places-api/v2/ovfiets/")
     suspend fun getOvFietsByStationId(
