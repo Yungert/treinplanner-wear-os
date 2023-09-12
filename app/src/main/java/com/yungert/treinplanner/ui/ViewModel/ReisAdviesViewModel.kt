@@ -62,7 +62,7 @@ class ReisAdviesViewModel : ViewModel() {
                             }
                             var eindTijd = ""
                             advies.primaryMessage?.message?.id?.let { id ->
-                                advies.primaryMessage.message.type?.let { type ->
+                                advies.primaryMessage.message.type.let { type ->
                                     nsApiRepository.fetchDisruptionById(id, type)
                                         .collect { result ->
                                             eindTijd = formatTime(

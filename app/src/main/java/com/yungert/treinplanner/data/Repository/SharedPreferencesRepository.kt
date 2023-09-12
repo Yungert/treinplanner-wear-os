@@ -41,4 +41,17 @@ class SharedPreferencesRepository {
             settings[dataStoreKey] = value
         }
     }
+
+    suspend fun getReisadviesId(context: Context, key: String): String? {
+        val dataStoreKey = stringPreferencesKey(key)
+        val preference = context.dataStore.data.first()
+        return preference[dataStoreKey]
+    }
+
+    suspend fun editReisadviesId(context: Context, key: String, value: String) {
+        val dataStoreKey = stringPreferencesKey(key)
+        context.dataStore.edit { settings ->
+            settings[dataStoreKey] = value
+        }
+    }
 }

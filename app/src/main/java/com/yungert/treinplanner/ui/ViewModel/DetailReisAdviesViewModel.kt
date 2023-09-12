@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.yungert.treinplanner.presentation.Data.Repository.NsApiRepository
+import com.yungert.treinplanner.presentation.Data.Repository.SharedPreferencesRepository
 import com.yungert.treinplanner.presentation.Data.api.NSApiClient
 import com.yungert.treinplanner.presentation.Data.api.Resource
 import com.yungert.treinplanner.presentation.ui.ErrorState
@@ -31,13 +32,14 @@ class DetailReisadviesViewModel : ViewModel() {
         MutableStateFlow<ViewStateDetailReisadvies>(ViewStateDetailReisadvies.Loading)
     val reisavies = _viewState.asStateFlow()
     private val nsApiRepository: NsApiRepository = NsApiRepository(NSApiClient)
-
+    private val sharedPreferencesRepository: SharedPreferencesRepository = SharedPreferencesRepository()
     fun getReisadviesDetail(reisAdviesId: String, context: Context) {
         if (!hasInternetConnection(context)) {
             _viewState.value = ViewStateDetailReisadvies.Problem(ErrorState.NO_CONNECTION)
             return
         }
         viewModelScope.launch {
+            sharedPreferencesRepository.editReisadviesId(context = context, key = "reisadviesId", value = reisAdviesId)
             nsApiRepository.fetchSingleTripById(reisadviesId = reisAdviesId).collect { result ->
                 when (result) {
                     is Resource.Success -> {
@@ -82,7 +84,7 @@ class DetailReisadviesViewModel : ViewModel() {
                         )
 
                         result.data?.primaryMessage?.message?.id?.let { id ->
-                            result.data?.primaryMessage.message.type?.let { type ->
+                            result.data.primaryMessage.message.type.let { type ->
                                 nsApiRepository.fetchDisruptionById(id, type).collect { result ->
                                     detailReisAdvies.eindTijdVerstoring =
                                         formatTime(
