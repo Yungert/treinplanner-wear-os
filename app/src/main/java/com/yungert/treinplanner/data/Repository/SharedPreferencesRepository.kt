@@ -1,13 +1,11 @@
 package com.yungert.treinplanner.presentation.Data.Repository
 
 import android.content.Context
-import androidx.annotation.Keep
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import com.yungert.treinplanner.presentation.ui.dataStore
 import kotlinx.coroutines.flow.first
 
-@Keep
 class SharedPreferencesRepository {
     suspend fun getFavouriteStation(context: Context, key: String): String? {
         val dataStoreKey = stringPreferencesKey(key)

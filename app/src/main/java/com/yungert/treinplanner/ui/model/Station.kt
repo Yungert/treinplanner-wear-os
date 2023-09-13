@@ -11,7 +11,6 @@ data class StationNamen(
     var afstandTotGebruiker: String = ""
 )
 
-@Keep
 var stationNamen = listOf(
     StationNamen("'s-Hertogenbosch", "ht"),
     StationNamen("'s-Hertogenbosch Oost", "hto"),

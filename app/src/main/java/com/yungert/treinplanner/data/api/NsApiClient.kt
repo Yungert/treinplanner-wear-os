@@ -1,14 +1,11 @@
 package com.yungert.treinplanner.presentation.Data.api
 
-import androidx.annotation.Keep
 import okhttp3.OkHttpClient
-
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 
-@Keep
 object NSApiClient {
     private const val BASE_URL = "https://gateway.apiportal.ns.nl/"
     val client = OkHttpClient.Builder()

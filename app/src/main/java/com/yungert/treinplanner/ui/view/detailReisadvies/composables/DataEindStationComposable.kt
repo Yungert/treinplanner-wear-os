@@ -21,12 +21,13 @@ import androidx.wear.compose.material.Card
 import androidx.wear.compose.material.Icon
 import androidx.wear.compose.material.Text
 import com.yungert.treinplanner.R
+import com.yungert.treinplanner.presentation.Data.models.Eindbestemming
 import com.yungert.treinplanner.presentation.ui.model.DataEindbestemmingStation
 import com.yungert.treinplanner.presentation.utils.fontsizeLabelCard
 import com.yungert.treinplanner.presentation.utils.iconSize
 
 @Composable
-fun DataEindStationComposable(dateEindStation: DataEindbestemmingStation) {
+fun DataEindStationComposable(dataEindStation: DataEindbestemmingStation, eindbestemming: String) {
     Card(
         onClick = {
         },
@@ -53,13 +54,13 @@ fun DataEindStationComposable(dateEindStation: DataEindbestemmingStation) {
                         .size(iconSize)
                 )
                 Text(
-                    text = dateEindStation.ritPrijsInEuro,
+                    text = dataEindStation.ritPrijsInEuro,
                     style = fontsizeLabelCard,
                     textAlign = TextAlign.Left
                 )
             }
         }
-        if (dateEindStation.ovFiets?.isEmpty() == true) {
+        if (dataEindStation.ovFiets?.isEmpty() == true) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth(),
@@ -77,12 +78,12 @@ fun DataEindStationComposable(dateEindStation: DataEindbestemmingStation) {
                 .fillMaxWidth(),
         ) {
             Text(
-                text = stringResource(id = R.string.label_ov_fiets),
+                text = stringResource(id = R.string.label_ov_fiets) + " " + stringResource(id = R.string.label_bij_station) + " " + eindbestemming ,
                 style = fontsizeLabelCard,
                 textAlign = TextAlign.Left
             )
         }
-        dateEindStation.ovFiets?.forEach { ovFiets ->
+        dataEindStation.ovFiets?.forEach { ovFiets ->
             Column(
                 modifier = Modifier
                     .fillMaxWidth(),

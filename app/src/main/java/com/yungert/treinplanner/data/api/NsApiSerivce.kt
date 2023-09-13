@@ -1,6 +1,5 @@
 package com.yungert.treinplanner.presentation.Data.api
 
-import androidx.annotation.Keep
 import com.yungert.treinplanner.data.models.DisruptionResponseModel
 import com.yungert.treinplanner.data.models.OvFietsResponseModel
 import com.yungert.treinplanner.presentation.Data.models.PlaceResponse
@@ -13,7 +12,6 @@ import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
-@Keep
 interface NSApiService {
     @GET("reisinformatie-api/api/v3/trips/")
     suspend fun getReisadviezen(

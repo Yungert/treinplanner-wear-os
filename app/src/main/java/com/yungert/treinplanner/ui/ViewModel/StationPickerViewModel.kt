@@ -43,7 +43,11 @@ class StationPickerViewModel : ViewModel() {
         viewModelScope.launch {
             stationNamen.forEach { station ->
                 station.favorite = false
-                if (sharedPreferencesRepository.getFavouriteStation(context = context, key = station.hiddenValue) != null) {
+                if (sharedPreferencesRepository.getFavouriteStation(
+                        context = context,
+                        key = station.hiddenValue
+                    ) != null
+                ) {
                     station.favorite = true
                 }
                 if (vanStation == null) {

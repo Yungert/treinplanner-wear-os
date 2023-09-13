@@ -241,7 +241,7 @@ fun DisplayDetailReisAdvies(
 
                 }
                 item {
-                    treinRit.dataEindStation?.let { DataEindStationComposable(it) }
+                    treinRit.dataEindStation?.let { DataEindStationComposable(dataEindStation = it, eindbestemming = treinRit.rit[treinRit.rit.size - 1].naamAankomstStation) }
                 }
                 item {
                     Column(
