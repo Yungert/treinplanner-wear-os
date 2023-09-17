@@ -8,6 +8,7 @@ import com.yungert.treinplanner.presentation.Data.Repository.SharedPreferencesRe
 import com.yungert.treinplanner.presentation.Data.api.NSApiClient
 import com.yungert.treinplanner.presentation.Data.api.Resource
 import com.yungert.treinplanner.presentation.ui.ErrorState
+import com.yungert.treinplanner.presentation.ui.model.AlternatiefVervoer
 import com.yungert.treinplanner.presentation.ui.model.DataEindbestemmingStation
 import com.yungert.treinplanner.presentation.ui.model.DetailReisadvies
 import com.yungert.treinplanner.presentation.ui.model.OvFiets
@@ -87,19 +88,47 @@ class DetailReisadviesViewModel : ViewModel() {
                             hoofdBericht = result.data?.primaryMessage?.message?.text,
                             eindTijdVerstoring = eindTijd,
                             dataEindStation = dataEindbestemmingStation,
+                            dataAlternatiefVervoer = AlternatiefVervoer(
+                                advies = null,
+                                soortVervoer = null,
+                                vertrekLocatieStation = null,
+                                minumimExtraReistijd = null,
+                                maximumExtraReistijd = null
+                            )
                         )
-
                         result.data?.primaryMessage?.message?.id?.let { id ->
                             result.data.primaryMessage.message.type.let { type ->
-                                nsApiRepository.fetchDisruptionById(id, type).collect { result ->
+                                nsApiRepository.fetchDisruptionById(id, type).collect { res ->
                                     detailReisAdvies.eindTijdVerstoring =
                                         formatTime(
-                                            result.data?.expectedDuration?.endTime
-                                                ?: result.data?.end, rekeningHoudenMetDag = true
+                                            res.data?.expectedDuration?.endTime ?: res.data?.end,
+                                            rekeningHoudenMetDag = true
                                         )
+                                    res.data?.timespans?.forEach { span ->
+                                        span.advices.forEach { advice ->
+                                            detailReisAdvies.dataAlternatiefVervoer?.advies =
+                                                advice.trim()
+                                        }
+                                        detailReisAdvies.dataAlternatiefVervoer?.maximumExtraReistijd =
+                                            span.additionalTravelTime.maximumDurationInMinutes.toString()
+                                        detailReisAdvies.dataAlternatiefVervoer?.minumimExtraReistijd =
+                                            span.additionalTravelTime.minimumDurationInMinutes.toString()
+                                    }
+                                    res.data?.alternativeTransportTimespans?.forEach { time ->
+                                        val locatie = time.alternativeTransport.location.find {
+                                            it.station.name == result.data.legs.get(result.data.legs.size - 1).origin.name
+                                        }
+                                        if (locatie?.description == null) {
+                                            return@forEach
+                                        }
+                                        detailReisAdvies.dataAlternatiefVervoer?.vertrekLocatieStation =
+                                            locatie.description
+                                    }
                                 }
                             }
                         }
+
+
 
 
                         result.data?.legs?.forEachIndexed { index, advies ->

@@ -26,7 +26,9 @@ import com.yungert.treinplanner.presentation.utils.iconSize
 @Composable
 fun PrimaryMessageComposable(
     hoofdBericht: String,
-    eindTijdVerstoring: String?
+    eindTijdVerstoring: String?,
+    minimumExtraReistijd: String?,
+    maximumExtraReistijd: String?,
 ) {
     Card(
         onClick = {},
@@ -69,6 +71,33 @@ fun PrimaryMessageComposable(
                     )
                     Text(
                         text = stringResource(id = R.string.label_verwachte_eindtijd) + ": " + eindTijdVerstoring,
+                        style = fontsizeLabelCard,
+                        textAlign = TextAlign.Left,
+                    )
+                }
+            }
+            if (maximumExtraReistijd != null) {
+                var extraReistijd = ""
+                if (minimumExtraReistijd != null && minimumExtraReistijd != maximumExtraReistijd) {
+                    extraReistijd = minimumExtraReistijd + "-"
+                }
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start,
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = "Icon",
+                        tint = Color.Yellow,
+                        modifier = Modifier
+                            .padding(horizontal = 2.dp)
+                            .size(iconSize)
+                    )
+                    Text(
+                        text = stringResource(id = R.string.label_extra_reistijd) + ": " + extraReistijd + maximumExtraReistijd + " " + stringResource(
+                            id = R.string.label_minuten
+                        ),
                         style = fontsizeLabelCard,
                         textAlign = TextAlign.Left,
                     )

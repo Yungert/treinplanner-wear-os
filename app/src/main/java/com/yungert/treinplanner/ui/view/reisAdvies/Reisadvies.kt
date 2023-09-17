@@ -44,9 +44,11 @@ import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListAnchorType
+import androidx.wear.compose.material.SwipeToDismissBox
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
 import androidx.wear.compose.material.rememberScalingLazyListState
+import androidx.wear.compose.material.rememberSwipeToDismissBoxState
 import com.yungert.treinplanner.R
 import com.yungert.treinplanner.presentation.ui.Navigation.Screen
 import com.yungert.treinplanner.presentation.ui.ViewModel.ReisAdviesViewModel
@@ -171,103 +173,110 @@ fun DisplayReisadvies(
     }
 
     val state = rememberPullRefreshState(refreshing, ::refresh)
-
-    Box(modifier = Modifier.pullRefresh(state = state)) {
-        Scaffold(
-            positionIndicator = {
-                PositionIndicator(scalingLazyListState = listState)
-            }
-        ) {
-            ScalingLazyColumn(
-                anchorType = ScalingLazyListAnchorType.ItemStart,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .onRotaryScrollEvent {
-                        coroutineScope.launch {
-                            listState.scrollBy(it.verticalScrollPixels)
+    val stateDismiss = rememberSwipeToDismissBoxState()
+    SwipeToDismissBox(
+        state = stateDismiss,
+        onDismissed = {
+            navController.popBackStack()
+        },
+    ) {
+        Box(modifier = Modifier.pullRefresh(state = state)) {
+            Scaffold(
+                positionIndicator = {
+                    PositionIndicator(scalingLazyListState = listState)
+                }
+            ) {
+                ScalingLazyColumn(
+                    anchorType = ScalingLazyListAnchorType.ItemStart,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .onRotaryScrollEvent {
+                            coroutineScope.launch {
+                                listState.scrollBy(it.verticalScrollPixels)
+                            }
+                            true
                         }
-                        true
-                    }
-                    .focusRequester(focusRequester)
-                    .focusable(),
-                state = listState)
-            {
-                item {
-                    Card(
-                        onClick = {
-                            navController.navigate(Screen.HomeScreen.route)
-                        },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .defaultMinSize(
-                                minWidth = minimaleBreedteTouchControls,
-                                minHeight = minimaleHoogteTouchControls
-                            ),
-                    ) {
-                        Box(
+                        .focusRequester(focusRequester)
+                        .focusable(),
+                    state = listState)
+                {
+                    item {
+                        Card(
+                            onClick = {
+                                navController.navigate(Screen.HomeScreen.route)
+                            },
                             modifier = Modifier
-                                .fillMaxSize()
-                                .wrapContentSize(Alignment.Center)
+                                .fillMaxWidth()
+                                .defaultMinSize(
+                                    minWidth = minimaleBreedteTouchControls,
+                                    minHeight = minimaleHoogteTouchControls
+                                ),
                         ) {
+                            Box(
+                                modifier = Modifier
+                                    .fillMaxSize()
+                                    .wrapContentSize(Alignment.Center)
+                            ) {
+                                Text(
+                                    text = stringResource(id = R.string.label_opniew_plannen),
+                                    textAlign = TextAlign.Center,
+                                    modifier = Modifier.align(Alignment.Center)
+                                )
+                            }
+                        }
+                    }
+                    item {
+                        ListHeader {
                             Text(
-                                text = stringResource(id = R.string.label_opniew_plannen),
+                                text = stringResource(id = R.string.label_reis_advies),
                                 textAlign = TextAlign.Center,
-                                modifier = Modifier.align(Alignment.Center)
                             )
                         }
                     }
-                }
-                item {
-                    ListHeader {
-                        Text(
-                            text = stringResource(id = R.string.label_reis_advies),
-                            textAlign = TextAlign.Center,
-                        )
-                    }
-                }
 
-                item {
-                    RouteComposable(
-                        navController = navController,
-                        vanStation = vanStation,
-                        naarStation = naarStation,
-                        reisAdvies = reisAdvies
-                    )
-                }
-
-                if (reisAdviezen.advies.isEmpty()) {
                     item {
-                        Text(
-                            text = stringResource(id = R.string.label_geen_reisadviezen_gevonden),
-                            textAlign = TextAlign.Center,
-                        )
-                    }
-                }
-
-                reisAdviezen.advies.forEachIndexed { index, advies ->
-                    item {
-                        ReisAdviesCardComposable(
+                        RouteComposable(
                             navController = navController,
-                            advies = advies,
-                            index = index,
-                            onClick = {
-                                indexReisadvies = it + INDEX_OFFSET
-                            }
+                            vanStation = vanStation,
+                            naarStation = naarStation,
+                            reisAdvies = reisAdvies
                         )
                     }
-                }
-                item {
-                    Column(
-                        modifier = Modifier.padding(bottom = 20.dp)
-                    ) {}
+
+                    if (reisAdviezen.advies.isEmpty()) {
+                        item {
+                            Text(
+                                text = stringResource(id = R.string.label_geen_reisadviezen_gevonden),
+                                textAlign = TextAlign.Center,
+                            )
+                        }
+                    }
+
+                    reisAdviezen.advies.forEachIndexed { index, advies ->
+                        item {
+                            ReisAdviesCardComposable(
+                                navController = navController,
+                                advies = advies,
+                                index = index,
+                                onClick = {
+                                    indexReisadvies = it + INDEX_OFFSET
+                                }
+                            )
+                        }
+                    }
+                    item {
+                        Column(
+                            modifier = Modifier.padding(bottom = 20.dp)
+                        ) {}
+                    }
                 }
             }
+            PullRefreshIndicator(
+                modifier = Modifier.align(alignment = Alignment.TopCenter),
+                refreshing = refreshing,
+                state = state,
+            )
         }
-        PullRefreshIndicator(
-            modifier = Modifier.align(alignment = Alignment.TopCenter),
-            refreshing = refreshing,
-            state = state,
-        )
     }
     LaunchedEffect(Unit) { focusRequester.requestFocus() }
     TimeText()

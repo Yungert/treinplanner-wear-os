@@ -36,8 +36,10 @@ import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListAnchorType
+import androidx.wear.compose.material.SwipeToDismissBox
 import androidx.wear.compose.material.TimeText
 import androidx.wear.compose.material.rememberScalingLazyListState
+import androidx.wear.compose.material.rememberSwipeToDismissBoxState
 import com.yungert.treinplanner.R
 import com.yungert.treinplanner.presentation.ui.ViewModel.RitDetailViewModel
 import com.yungert.treinplanner.presentation.ui.ViewModel.ViewStateRitDetail
@@ -170,69 +172,76 @@ fun DisplayRitDetail(
         }
 
     }
-
-    val state = rememberPullRefreshState(refreshing, ::refresh)
-    Box(modifier = Modifier.pullRefresh(state = state)) {
-        Scaffold(
-            positionIndicator = {
-                PositionIndicator(scalingLazyListState = listState)
-            }
-        ) {
-            ScalingLazyColumn(
-                anchorType = ScalingLazyListAnchorType.ItemStart,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .onRotaryScrollEvent {
-                        coroutineScope.launch {
-                            listState.scrollBy(it.verticalScrollPixels)
+    val stateDismiss = rememberSwipeToDismissBoxState()
+    SwipeToDismissBox(
+        state = stateDismiss,
+        onDismissed = {
+            navController.popBackStack()
+        },
+    ) {
+        val state = rememberPullRefreshState(refreshing, ::refresh)
+        Box(modifier = Modifier.pullRefresh(state = state)) {
+            Scaffold(
+                positionIndicator = {
+                    PositionIndicator(scalingLazyListState = listState)
+                }
+            ) {
+                ScalingLazyColumn(
+                    anchorType = ScalingLazyListAnchorType.ItemStart,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .onRotaryScrollEvent {
+                            coroutineScope.launch {
+                                listState.scrollBy(it.verticalScrollPixels)
+                            }
+                            true
                         }
-                        true
-                    }
-                    .focusRequester(focusRequester)
-                    .focusable(),
-                state = listState)
-            {
-                item {
-                    ListHeader {
-                        RitInfoCompoasble(
-                            ritNummer = ritDetail.ritNummer,
-                            eindbestemmingTrein = ritDetail.eindbestemmingTrein
-                        )
-                    }
-                }
-
-                if (ritDetail.opgeheven) {
+                        .focusRequester(focusRequester)
+                        .focusable(),
+                    state = listState)
+                {
                     item {
-                        RitOpgehevenComposable()
+                        ListHeader {
+                            RitInfoCompoasble(
+                                ritNummer = ritDetail.ritNummer,
+                                eindbestemmingTrein = ritDetail.eindbestemmingTrein
+                            )
+                        }
                     }
-                }
 
-                item {
-                    MaterieelInzetComposable(ritDetail)
-                }
+                    if (ritDetail.opgeheven) {
+                        item {
+                            RitOpgehevenComposable()
+                        }
+                    }
 
-                item {
-                    ShowNotesComposable(ritDetail.note)
-                }
-
-                treinStops.stops.forEachIndexed { index, stop ->
-                    val tekstKleur = if (stop.opgeheven) Color.Red else Color.White
                     item {
-                        StopsComposable(
-                            index = index,
-                            stop = stop,
-                            tekstKleur = tekstKleur,
-                            aantalStops = ritDetail.stops.size
-                        )
+                        MaterieelInzetComposable(ritDetail)
+                    }
+
+                    item {
+                        ShowNotesComposable(ritDetail.note)
+                    }
+
+                    treinStops.stops.forEachIndexed { index, stop ->
+                        val tekstKleur = if (stop.opgeheven) Color.Red else Color.White
+                        item {
+                            StopsComposable(
+                                index = index,
+                                stop = stop,
+                                tekstKleur = tekstKleur,
+                                aantalStops = ritDetail.stops.size
+                            )
+                        }
                     }
                 }
             }
+            PullRefreshIndicator(
+                modifier = Modifier.align(alignment = Alignment.TopCenter),
+                refreshing = refreshing,
+                state = state,
+            )
         }
-        PullRefreshIndicator(
-            modifier = Modifier.align(alignment = Alignment.TopCenter),
-            refreshing = refreshing,
-            state = state,
-        )
     }
     LaunchedEffect(Unit) { focusRequester.requestFocus() }
     TimeText()

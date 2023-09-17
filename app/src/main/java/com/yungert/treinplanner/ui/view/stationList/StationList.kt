@@ -43,9 +43,11 @@ import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListAnchorType
+import androidx.wear.compose.material.SwipeToDismissBox
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.TimeText
 import androidx.wear.compose.material.rememberScalingLazyListState
+import androidx.wear.compose.material.rememberSwipeToDismissBoxState
 import com.yungert.treinplanner.R
 import com.yungert.treinplanner.presentation.ui.ViewModel.StationPickerViewModel
 import com.yungert.treinplanner.presentation.ui.ViewModel.ViewStateStationPicker
@@ -151,76 +153,83 @@ fun ShowStations(
     coroutineScope.launch {
         listState.scrollToItem(1)
     }
-
-    Scaffold(
-        positionIndicator = {
-            PositionIndicator(scalingLazyListState = listState)
-        }
+    val stateDismiss = rememberSwipeToDismissBoxState()
+    SwipeToDismissBox(
+        state = stateDismiss,
+        onDismissed = {
+            navController.popBackStack()
+        },
     ) {
-        ScalingLazyColumn(
-            anchorType = ScalingLazyListAnchorType.ItemStart,
-            modifier = Modifier
-                .fillMaxWidth()
-                .onRotaryScrollEvent {
-                    coroutineScope.launch {
-                        listState.scrollBy(it.verticalScrollPixels)
+        Scaffold(
+            positionIndicator = {
+                PositionIndicator(scalingLazyListState = listState)
+            }
+        ) {
+            ScalingLazyColumn(
+                anchorType = ScalingLazyListAnchorType.ItemStart,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .onRotaryScrollEvent {
+                        coroutineScope.launch {
+                            listState.scrollBy(it.verticalScrollPixels)
+                        }
+                        true
                     }
-                    true
-                }
-                .focusRequester(focusRequester)
-                .focusable(),
-            state = listState)
-        {
-            item {
-                ListHeader {
-                    Text(
-                        text = if (vanStation != null) stringResource(id = R.string.kies_aankomst_station) else stringResource(
-                            id = R.string.kies_vertrek_station
-                        ),
-                        textAlign = TextAlign.Center,
-                    )
-                }
-            }
-            item {
-                TextField(
-                    value = searchText,
-                    onValueChange = { searchText = it },
-                    label = {
-                        Text(
-                            text = stringResource(id = R.string.text_zoek_station),
-                            color = Color.White
-                        )
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    keyboardOptions = KeyboardOptions(
-                        imeAction = ImeAction.Done
-                    ),
-                    colors = TextFieldDefaults.textFieldColors(
-                        textColor = Color.White,
-                        cursorColor = Color.White,
-                        unfocusedIndicatorColor = Color.White,
-                        focusedIndicatorColor = Color.White
-                    ),
-                    leadingIcon = {
-                        Icon(
-                            imageVector = Icons.Default.Search,
-                            contentDescription = "Icon",
-                            tint = Color.White,
-                        )
-                    },
-                )
-            }
-
-            filteredItems.forEach { station ->
+                    .focusRequester(focusRequester)
+                    .focusable(),
+                state = listState)
+            {
                 item {
-                    StationCardComposable(
-                        item = station,
-                        navController = navController,
-                        context = context,
-                        vanStation = vanStation,
-                        viewmodel = viewModel
+                    ListHeader {
+                        Text(
+                            text = if (vanStation != null) stringResource(id = R.string.kies_aankomst_station) else stringResource(
+                                id = R.string.kies_vertrek_station
+                            ),
+                            textAlign = TextAlign.Center,
+                        )
+                    }
+                }
+                item {
+                    TextField(
+                        value = searchText,
+                        onValueChange = { searchText = it },
+                        label = {
+                            Text(
+                                text = stringResource(id = R.string.text_zoek_station),
+                                color = Color.White
+                            )
+                        },
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        keyboardOptions = KeyboardOptions(
+                            imeAction = ImeAction.Done
+                        ),
+                        colors = TextFieldDefaults.textFieldColors(
+                            textColor = Color.White,
+                            cursorColor = Color.White,
+                            unfocusedIndicatorColor = Color.White,
+                            focusedIndicatorColor = Color.White
+                        ),
+                        leadingIcon = {
+                            Icon(
+                                imageVector = Icons.Default.Search,
+                                contentDescription = "Icon",
+                                tint = Color.White,
+                            )
+                        },
                     )
+                }
+
+                filteredItems.forEach { station ->
+                    item {
+                        StationCardComposable(
+                            item = station,
+                            navController = navController,
+                            context = context,
+                            vanStation = vanStation,
+                            viewmodel = viewModel
+                        )
+                    }
                 }
             }
         }

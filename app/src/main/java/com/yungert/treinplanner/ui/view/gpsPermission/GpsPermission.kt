@@ -26,8 +26,10 @@ import androidx.wear.compose.material.PositionIndicator
 import androidx.wear.compose.material.Scaffold
 import androidx.wear.compose.material.ScalingLazyColumn
 import androidx.wear.compose.material.ScalingLazyListAnchorType
+import androidx.wear.compose.material.SwipeToDismissBox
 import androidx.wear.compose.material.Text
 import androidx.wear.compose.material.rememberScalingLazyListState
+import androidx.wear.compose.material.rememberSwipeToDismissBoxState
 import com.yungert.treinplanner.R
 import com.yungert.treinplanner.presentation.ui.Navigation.Screen
 import com.yungert.treinplanner.ui.view.gpsPermission.composable.GpsPermissionComposable
@@ -58,39 +60,47 @@ fun ShowGpsPermisson(navController: NavController) {
     val focusRequester = remember { FocusRequester() }
     val listState = rememberScalingLazyListState()
     val coroutineScope = rememberCoroutineScope()
-    Scaffold(
-        positionIndicator = {
-            PositionIndicator(scalingLazyListState = listState)
-        }
+    val stateDismiss = rememberSwipeToDismissBoxState()
+    SwipeToDismissBox(
+        state = stateDismiss,
+        onDismissed = {
+            navController.popBackStack()
+        },
     ) {
-        ScalingLazyColumn(
-            anchorType = ScalingLazyListAnchorType.ItemStart,
-            modifier = Modifier
-                .fillMaxWidth()
-                .onRotaryScrollEvent {
-                    coroutineScope.launch {
-                        listState.scrollBy(it.verticalScrollPixels)
+        Scaffold(
+            positionIndicator = {
+                PositionIndicator(scalingLazyListState = listState)
+            }
+        ) {
+            ScalingLazyColumn(
+                anchorType = ScalingLazyListAnchorType.ItemStart,
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .onRotaryScrollEvent {
+                        coroutineScope.launch {
+                            listState.scrollBy(it.verticalScrollPixels)
+                        }
+                        true
                     }
-                    true
+                    .focusRequester(focusRequester)
+                    .focusable(),
+                state = listState)
+            {
+                item {
+                    ListHeader {
+                        Text(
+                            text = stringResource(id = R.string.label_header_gps_toestemming),
+                            textAlign = TextAlign.Center,
+                        )
+                    }
                 }
-                .focusRequester(focusRequester)
-                .focusable(),
-            state = listState)
-        {
-            item {
-                ListHeader {
-                    Text(
-                        text = stringResource(id = R.string.label_header_gps_toestemming),
-                        textAlign = TextAlign.Center,
+                item {
+                    GpsPermissionComposable(
+                        navController = navController,
+                        context = context,
+                        permissionLauncher = permissionLauncher
                     )
                 }
-            }
-            item {
-                GpsPermissionComposable(
-                    navController = navController,
-                    context = context,
-                    permissionLauncher = permissionLauncher
-                )
             }
         }
     }
