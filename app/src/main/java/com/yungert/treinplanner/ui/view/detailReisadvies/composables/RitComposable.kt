@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.wear.compose.material.Card
 import com.yungert.treinplanner.presentation.ui.Navigation.Screen
 import com.yungert.treinplanner.presentation.ui.model.RitDetail
+import com.yungert.treinplanner.presentation.utils.ShorterStockClassificationType
 import com.yungert.treinplanner.presentation.utils.minimaleBreedteTouchControls
 import com.yungert.treinplanner.presentation.utils.minimaleHoogteTouchControls
 
@@ -61,8 +62,8 @@ fun RitComposable(
             reis.berichten.forEach { bericht ->
                 ReisadviesBerichtenComposable(bericht = bericht)
             }
-            if (reis.kortereTreinDanGepland) {
-                KortereTreinWarningCompoasble()
+            if (reis.kortereTreinDanGepland != ShorterStockClassificationType.FALSE) {
+                KortereTreinWarningCompoasble(reis.kortereTreinDanGepland)
             }
         }
     }

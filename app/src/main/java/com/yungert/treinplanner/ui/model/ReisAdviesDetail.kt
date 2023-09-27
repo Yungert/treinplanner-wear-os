@@ -3,6 +3,7 @@ package com.yungert.treinplanner.presentation.ui.model
 import androidx.annotation.Keep
 import com.yungert.treinplanner.presentation.Data.models.Message
 import com.yungert.treinplanner.presentation.Data.models.TransferMessage
+import com.yungert.treinplanner.presentation.utils.ShorterStockClassificationType
 
 @Keep
 data class DetailReisadvies(
@@ -31,7 +32,7 @@ data class RitDetail(
     val ritNummer: String,
     val eindbestemmingTrein: String,
     val datum: String,
-    val kortereTreinDanGepland: Boolean,
+    val kortereTreinDanGepland: ShorterStockClassificationType,
 
 
     val naamVertrekStation: String,

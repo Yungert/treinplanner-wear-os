@@ -172,6 +172,7 @@ fun DisplayRitDetail(
         }
 
     }
+
     val stateDismiss = rememberSwipeToDismissBoxState()
     SwipeToDismissBox(
         state = stateDismiss,

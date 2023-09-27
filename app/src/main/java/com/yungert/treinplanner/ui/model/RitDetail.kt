@@ -18,6 +18,7 @@ data class TreinRitDetail(
     val note: List<JourneyNote>?,
 )
 
+@Keep
 data class StopOpRoute(
     val stationNaam: String,
     val spoor: String?,
@@ -33,6 +34,7 @@ data class StopOpRoute(
     val status: StopStatusType?
 )
 
+@Keep
 data class MaterieelInzet(
     var treinNummer: String,
     var eindBestemmingTreindeel: String

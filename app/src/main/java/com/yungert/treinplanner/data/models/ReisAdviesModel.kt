@@ -89,7 +89,7 @@ data class Leg(
     val shorterStock: Boolean,
     val changeCouldBePossible: Boolean,
     val shorterStockWarning: String,
-    val shorterStockClassification: String,
+    val shorterStockClassification: String?,
     val journeyDetail: List<Detail>,
     val reachable: Boolean,
     val plannedDurationInMinutes: Int,

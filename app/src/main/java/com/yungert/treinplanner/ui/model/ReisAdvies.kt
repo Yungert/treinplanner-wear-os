@@ -3,6 +3,7 @@ package com.yungert.treinplanner.presentation.ui.model
 import androidx.annotation.Keep
 import com.yungert.treinplanner.presentation.Data.models.Message
 import com.yungert.treinplanner.presentation.Data.models.PrimaryMessage
+import com.yungert.treinplanner.presentation.utils.ShorterStockClassificationType
 import com.yungert.treinplanner.presentation.utils.TripStatus
 
 @Keep
@@ -32,4 +33,5 @@ data class Adviezen(
     val aandachtsPunten: String?,
     val treinSoortenOpRit: String,
     val alternatiefVervoer: Boolean,
+    val kortereTrein: ShorterStockClassificationType,
 )

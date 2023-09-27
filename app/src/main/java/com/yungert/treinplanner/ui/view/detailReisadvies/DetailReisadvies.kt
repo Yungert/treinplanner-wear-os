@@ -46,7 +46,6 @@ import androidx.wear.compose.material.TimeText
 import androidx.wear.compose.material.rememberScalingLazyListState
 import androidx.wear.compose.material.rememberSwipeToDismissBoxState
 import com.yungert.treinplanner.R
-import com.yungert.treinplanner.presentation.ui.Navigation.Screen
 import com.yungert.treinplanner.presentation.ui.ViewModel.DetailReisadviesViewModel
 import com.yungert.treinplanner.presentation.ui.ViewModel.ViewStateDetailReisadvies
 import com.yungert.treinplanner.presentation.ui.model.DetailReisadvies
@@ -170,6 +169,7 @@ fun DisplayDetailReisAdvies(
         }
 
     }
+
     val stateDismiss = rememberSwipeToDismissBoxState()
     SwipeToDismissBox(
         state = stateDismiss,

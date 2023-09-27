@@ -62,9 +62,9 @@ data class SummaryAdditionalTravelTime(
     @SerializedName("shortLabel")
     val shortLabel: String,
     @SerializedName("minimumDurationInMinutes")
-    val minimumDurationInMinutes: Int,
+    val minimumDurationInMinutes: Int?,
     @SerializedName("maximumDurationInMinutes")
-    val maximumDurationInMinutes: Int
+    val maximumDurationInMinutes: Int?
 )
 
 @Keep
@@ -130,9 +130,9 @@ data class Timespan(
     @SerializedName("cause")
     val cause: Cause,
     @SerializedName("additionalTravelTime")
-    val additionalTravelTime: SummaryAdditionalTravelTime,
+    val additionalTravelTime: SummaryAdditionalTravelTime?,
     @SerializedName("alternativeTransport")
-    val alternativeTransport: AlternativeTransport,
+    val alternativeTransport: AlternativeTransport?,
     @SerializedName("advices")
     val advices: List<String>
 )
@@ -152,9 +152,9 @@ data class Cause(
 @Keep
 data class AlternativeTransport(
     @SerializedName("label")
-    val label: String,
+    val label: String?,
     @SerializedName("shortLabel")
-    val shortLabel: String
+    val shortLabel: String?
 )
 
 @Keep

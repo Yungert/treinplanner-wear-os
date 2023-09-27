@@ -11,6 +11,7 @@ import com.yungert.treinplanner.presentation.ui.ErrorState
 import com.yungert.treinplanner.presentation.ui.model.Adviezen
 import com.yungert.treinplanner.presentation.ui.model.Reisadvies
 import com.yungert.treinplanner.presentation.utils.DrukteIndicatorFormatter
+import com.yungert.treinplanner.presentation.utils.ShorterStockClassificationType
 import com.yungert.treinplanner.presentation.utils.TripStatus
 import com.yungert.treinplanner.presentation.utils.calculateTimeDiff
 import com.yungert.treinplanner.presentation.utils.formatTime
@@ -72,6 +73,22 @@ class ReisAdviesViewModel : ViewModel() {
                                         }
                                 }
                             }
+                            var kortereTrein = ShorterStockClassificationType.FALSE
+                            advies.legs.forEach { leg ->
+                                when (leg.shorterStockClassification?.let {
+                                    ShorterStockClassificationType.fromValue(it)
+                                }) {
+                                    ShorterStockClassificationType.BUSY -> {
+                                        kortereTrein = ShorterStockClassificationType.BUSY
+                                    }
+
+                                    ShorterStockClassificationType.EXTRA_BUSY -> {
+                                        kortereTrein = ShorterStockClassificationType.EXTRA_BUSY
+                                    }
+
+                                    else -> {}
+                                }
+                            }
 
                             adviezen.add(
                                 Adviezen(
@@ -103,6 +120,7 @@ class ReisAdviesViewModel : ViewModel() {
                                     alternatiefVervoer = TripStatus.fromValue(advies.status) == TripStatus.ALTERNATIVE_TRANSPORT,
                                     primaryMessage = advies.primaryMessage,
                                     eindTijdverstoring = eindTijd,
+                                    kortereTrein = kortereTrein
                                 )
                             )
                         }

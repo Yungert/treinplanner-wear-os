@@ -183,7 +183,9 @@ fun DisplayReisadvies(
         Box(modifier = Modifier.pullRefresh(state = state)) {
             Scaffold(
                 positionIndicator = {
-                    PositionIndicator(scalingLazyListState = listState)
+                    PositionIndicator(
+                        scalingLazyListState = listState
+                    )
                 }
             ) {
                 ScalingLazyColumn(

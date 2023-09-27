@@ -1,4 +1,4 @@
-package com.yungert.treinplanner.ui.view.detailReisadvies.composables
+package com.yungert.treinplanner.ui.view.reisAdvies.composables
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -22,7 +22,7 @@ import com.yungert.treinplanner.presentation.utils.fontsizeLabelCard
 import com.yungert.treinplanner.presentation.utils.iconSize
 
 @Composable
-fun KortereTreinWarningCompoasble(drukte: ShorterStockClassificationType) {
+fun KortereTreinComposable(drukte: ShorterStockClassificationType) {
     var text = ""
     var color = Color.Yellow
     if (drukte == ShorterStockClassificationType.BUSY) {

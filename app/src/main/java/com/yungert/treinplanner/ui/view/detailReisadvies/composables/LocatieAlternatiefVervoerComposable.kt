@@ -58,6 +58,30 @@ fun ShowInformationAlternatiefVervoer(data: AlternatiefVervoer?) {
             horizontalArrangement = Arrangement.Start,
         ) {
 
+            data?.soortVervoer?.let {
+                Icon(
+                    imageVector = Icons.Default.Warning,
+                    contentDescription = "Icon",
+                    tint = Color.White,
+                    modifier = Modifier
+                        .padding(horizontal = 2.dp)
+                        .size(iconSize)
+                )
+
+                Text(
+                    text = it,
+                    style = fontsizeLabelCard,
+                    textAlign = TextAlign.Start,
+                    maxLines = 2,
+                )
+            }
+        }
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start,
+        ) {
+
             data?.vertrekLocatieStation?.let {
                 Icon(
                     imageVector = Icons.Default.Warning,
@@ -72,7 +96,6 @@ fun ShowInformationAlternatiefVervoer(data: AlternatiefVervoer?) {
                     text = stringResource(id = R.string.label_alternatief_vervoer_locatie) + ": " + it,
                     style = fontsizeLabelCard,
                     textAlign = TextAlign.Start,
-                    maxLines = 2,
                 )
             }
         }

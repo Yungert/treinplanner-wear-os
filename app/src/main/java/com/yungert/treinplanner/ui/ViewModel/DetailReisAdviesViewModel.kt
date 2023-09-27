@@ -13,6 +13,7 @@ import com.yungert.treinplanner.presentation.ui.model.DataEindbestemmingStation
 import com.yungert.treinplanner.presentation.ui.model.DetailReisadvies
 import com.yungert.treinplanner.presentation.ui.model.OvFiets
 import com.yungert.treinplanner.presentation.ui.model.RitDetail
+import com.yungert.treinplanner.presentation.utils.ShorterStockClassificationType
 import com.yungert.treinplanner.presentation.utils.TransferType
 import com.yungert.treinplanner.presentation.utils.TripStatus
 import com.yungert.treinplanner.presentation.utils.calculateTimeDiff
@@ -104,19 +105,23 @@ class DetailReisadviesViewModel : ViewModel() {
                                             res.data?.expectedDuration?.endTime ?: res.data?.end,
                                             rekeningHoudenMetDag = true
                                         )
+
                                     res.data?.timespans?.forEach { span ->
+                                        detailReisAdvies.dataAlternatiefVervoer?.soortVervoer =
+                                            span.alternativeTransport?.shortLabel
                                         span.advices.forEach { advice ->
                                             detailReisAdvies.dataAlternatiefVervoer?.advies =
                                                 advice.trim()
                                         }
                                         detailReisAdvies.dataAlternatiefVervoer?.maximumExtraReistijd =
-                                            span.additionalTravelTime.maximumDurationInMinutes.toString()
+                                            span.additionalTravelTime?.maximumDurationInMinutes?.toString()
                                         detailReisAdvies.dataAlternatiefVervoer?.minumimExtraReistijd =
-                                            span.additionalTravelTime.minimumDurationInMinutes.toString()
+                                            span.additionalTravelTime?.minimumDurationInMinutes?.toString()
+
                                     }
                                     res.data?.alternativeTransportTimespans?.forEach { time ->
-                                        val locatie = time.alternativeTransport.location.find {
-                                            it.station.name == result.data.legs.get(result.data.legs.size - 1).origin.name
+                                        val locatie = time.alternativeTransport?.location?.find {
+                                            it.station.name == result.data.legs[result.data.legs.size - 1].origin.name
                                         }
                                         if (locatie?.description == null) {
                                             return@forEach
@@ -134,7 +139,7 @@ class DetailReisadviesViewModel : ViewModel() {
                         result.data?.legs?.forEachIndexed { index, advies ->
                             var ritDetail: RitDetail? = null
                             var overstap = ""
-                            val alternatievVervoerInzet = advies.alternativeTransport
+                            val alternatiefVervoerInzet = advies.alternativeTransport
                             if (index > 0) {
                                 var aankomstVorigeTrein =
                                     result.data.legs[index - 1].destination.actualDateTime
@@ -159,19 +164,19 @@ class DetailReisadviesViewModel : ViewModel() {
                             }
                             ritDetail = RitDetail(
                                 treinOperator = advies.product.operatorName,
-                                treinOperatorType = if (!alternatievVervoerInzet) advies.product.categoryCode else advies.product.longCategoryName,
-                                ritNummer = if (!alternatievVervoerInzet) advies.product.number else "",
+                                treinOperatorType = if (!alternatiefVervoerInzet) advies.product.categoryCode else advies.product.longCategoryName.trim(),
+                                ritNummer = if (!alternatiefVervoerInzet) advies.product.number else "",
                                 eindbestemmingTrein = advies.direction,
                                 naamVertrekStation = advies.origin.name,
                                 geplandeVertrektijd = formatTime(advies.origin.plannedDateTime),
-                                vertrekSpoor = if (alternatievVervoerInzet) "" else advies.origin.actualTrack
+                                vertrekSpoor = if (alternatiefVervoerInzet) "" else advies.origin.actualTrack
                                     ?: advies.origin.plannedTrack,
                                 naamAankomstStation = advies.destination.name,
                                 geplandeAankomsttijd = formatTime(
                                     advies.destination.actualDateTime
                                         ?: advies.destination.plannedDateTime
                                 ),
-                                aankomstSpoor = if (alternatievVervoerInzet) "" else advies.destination.actualTrack
+                                aankomstSpoor = if (alternatiefVervoerInzet) "" else advies.destination.actualTrack
                                     ?: advies.destination.plannedTrack,
                                 vertrekVertraging = calculateTimeDiff(
                                     advies.origin.plannedDateTime,
@@ -183,13 +188,17 @@ class DetailReisadviesViewModel : ViewModel() {
                                 ),
                                 berichten = advies.messages,
                                 transferBericht = advies.transferMessages,
-                                alternatiefVervoer = alternatievVervoerInzet,
+                                alternatiefVervoer = alternatiefVervoerInzet,
                                 ritId = advies.journeyDetailRef,
                                 vertrekStationUicCode = advies.origin.uicCode,
                                 aankomstStationUicCode = advies.destination.uicCode,
                                 datum = advies.origin.plannedDateTime,
                                 overstapTijd = overstap,
-                                kortereTreinDanGepland = advies.shorterStock,
+                                kortereTreinDanGepland = advies.shorterStockClassification?.let {
+                                    ShorterStockClassificationType.fromValue(
+                                        it
+                                    )
+                                } ?: ShorterStockClassificationType.FALSE,
                                 opgeheven = advies.cancelled,
                                 punctualiteit = advies.punctuality ?: 0.0,
                                 crossPlatform = overstapCrossPlatform,

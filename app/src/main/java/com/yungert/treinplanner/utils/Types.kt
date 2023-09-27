@@ -78,6 +78,7 @@ enum class TravelType(val value: String) {
 
 enum class ShorterStockClassificationType(val value: String) {
     BUSY("BUSY"),
+    FALSE("FALSE"),
     EXTRA_BUSY("EXTRA_BUSY");
 
     companion object {
