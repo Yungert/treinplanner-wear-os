@@ -1,7 +1,9 @@
 package com.yungert.treinplanner.ui.view.ritDetail.composables
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,28 +23,35 @@ import com.yungert.treinplanner.presentation.utils.iconSize
 
 @Composable
 fun ShowNotesComposable(note: List<JourneyNote>?) {
-    note?.forEach { note ->
-        if (note.text != null) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(bottom = 2.dp),
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Start,
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Info,
-                    contentDescription = "Icon",
-                    tint = Color.Yellow,
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        note?.forEach { note ->
+            if (note.text != null) {
+                Row(
                     modifier = Modifier
-                        .padding(horizontal = 2.dp)
-                        .size(iconSize)
-                )
-                Text(
-                    text = note.text,
-                    style = fontsizeLabelCard,
-                    textAlign = TextAlign.Left,
-                )
+                        .fillMaxWidth()
+                        .padding(bottom = 2.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Start,
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = "Icon",
+                        tint = Color.Yellow,
+                        modifier = Modifier
+                            .padding(horizontal = 2.dp)
+                            .size(iconSize)
+                    )
+                    Text(
+                        text = note.text,
+                        style = fontsizeLabelCard,
+                        textAlign = TextAlign.Left,
+                    )
+                }
             }
         }
     }

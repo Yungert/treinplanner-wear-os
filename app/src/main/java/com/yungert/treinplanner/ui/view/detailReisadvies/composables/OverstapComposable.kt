@@ -83,7 +83,7 @@ fun OverstapComposable(reis: RitDetail) {
                     )
                 } else {
                     Text(
-                        text = reis.overstapTijd + " " + stringResource(id = R.string.text_tijd_overstap_op_andere_trein) + " " + reis.vertrekSpoor,
+                        text = reis.overstapTijd + " " + stringResource(id = R.string.text_tijd_overstap_op_andere_trein) + " " + (reis.actueelVertrekSpoor ?: reis.geplandVertrekSpoor),
                         style = fontsizeLabelCard,
                         textAlign = TextAlign.Left
                     )

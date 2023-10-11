@@ -37,13 +37,15 @@ data class RitDetail(
 
     val naamVertrekStation: String,
     val geplandeVertrektijd: String,
-    val vertrekSpoor: String,
+    val geplandVertrekSpoor: String,
+    val actueelVertrekSpoor: String?,
     val vertrekVertraging: String,
     val vertrekStationUicCode: String,
 
     val naamAankomstStation: String,
     val geplandeAankomsttijd: String,
-    val aankomstSpoor: String?,
+    val geplandAankomstSpoor: String,
+    val actueelAankomstspoor: String?,
     val aankomstVertraging: String,
     val aankomstStationUicCode: String,
     val punctualiteit: Double,

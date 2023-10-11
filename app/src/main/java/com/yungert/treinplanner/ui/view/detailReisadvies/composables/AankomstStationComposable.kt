@@ -70,7 +70,7 @@ fun AankomstStationComposable(reis: RitDetail) {
             modifier = Modifier.padding(horizontal = 2.dp)
         )
 
-        if (reis.aankomstSpoor != "") {
+        if (!reis.alternatiefVervoer) {
             Icon(
                 imageVector = Icons.Default.Tram,
                 contentDescription = "Icon",
@@ -79,9 +79,10 @@ fun AankomstStationComposable(reis: RitDetail) {
                     .size(iconSize),
             )
             Text(
-                text = reis.aankomstSpoor!!,
+                text = reis.actueelAankomstspoor ?: reis.geplandAankomstSpoor,
                 style = fontsizeLabelCard,
                 textAlign = TextAlign.Left,
+                color = if(reis.actueelAankomstspoor != reis.geplandAankomstSpoor) Color.Red else Color.White,
             )
         }
 

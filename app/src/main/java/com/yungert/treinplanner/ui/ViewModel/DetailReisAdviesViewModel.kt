@@ -169,15 +169,15 @@ class DetailReisadviesViewModel : ViewModel() {
                                 eindbestemmingTrein = advies.direction,
                                 naamVertrekStation = advies.origin.name,
                                 geplandeVertrektijd = formatTime(advies.origin.plannedDateTime),
-                                vertrekSpoor = if (alternatiefVervoerInzet) "" else advies.origin.actualTrack
-                                    ?: advies.origin.plannedTrack,
+                                geplandVertrekSpoor = if (alternatiefVervoerInzet) "" else advies.origin.plannedTrack,
+                                actueelVertrekSpoor = if (alternatiefVervoerInzet) "" else advies.origin.actualTrack,
                                 naamAankomstStation = advies.destination.name,
                                 geplandeAankomsttijd = formatTime(
                                     advies.destination.actualDateTime
                                         ?: advies.destination.plannedDateTime
                                 ),
-                                aankomstSpoor = if (alternatiefVervoerInzet) "" else advies.destination.actualTrack
-                                    ?: advies.destination.plannedTrack,
+                                geplandAankomstSpoor = if (alternatiefVervoerInzet) "" else advies.destination.plannedTrack,
+                                actueelAankomstspoor = if (alternatiefVervoerInzet) "" else advies.destination.plannedTrack,
                                 vertrekVertraging = calculateTimeDiff(
                                     advies.origin.plannedDateTime,
                                     advies.origin.actualDateTime
