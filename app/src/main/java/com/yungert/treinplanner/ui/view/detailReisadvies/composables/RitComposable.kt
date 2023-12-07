@@ -59,7 +59,7 @@ fun RitComposable(
 
             AankomstStationComposable(reis = reis)
 
-            reis.berichten.forEach { bericht ->
+            reis.berichten?.forEach { bericht ->
                 ReisadviesBerichtenComposable(bericht = bericht)
             }
             if (reis.kortereTreinDanGepland != ShorterStockClassificationType.FALSE) {

@@ -70,7 +70,7 @@ fun VertrekStationComposable(reis: RitDetail) {
             modifier = Modifier.padding(horizontal = 2.dp)
         )
 
-        if(!reis.alternatiefVervoer) {
+        if (!reis.alternatiefVervoer) {
             Icon(
                 imageVector = Icons.Default.Tram,
                 contentDescription = "Icon",
@@ -82,7 +82,7 @@ fun VertrekStationComposable(reis: RitDetail) {
                 text = reis.actueelVertrekSpoor ?: reis.geplandVertrekSpoor,
                 style = fontsizeLabelCard,
                 textAlign = TextAlign.Left,
-                color = if(reis.actueelVertrekSpoor != reis.geplandVertrekSpoor) Color.Red else Color.White,
+                color = if (reis.actueelVertrekSpoor != reis.geplandVertrekSpoor) Color.Red else Color.White,
             )
         }
 

@@ -120,7 +120,7 @@ class DetailReisadviesViewModel : ViewModel() {
 
                                     }
                                     res.data?.alternativeTransportTimespans?.forEach { time ->
-                                        val locatie = time.alternativeTransport?.location?.find {
+                                        val locatie = time.alternativeTransport.location.find {
                                             it.station.name == result.data.legs[result.data.legs.size - 1].origin.name
                                         }
                                         if (locatie?.description == null) {

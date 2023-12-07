@@ -82,7 +82,7 @@ fun AankomstStationComposable(reis: RitDetail) {
                 text = reis.actueelAankomstspoor ?: reis.geplandAankomstSpoor,
                 style = fontsizeLabelCard,
                 textAlign = TextAlign.Left,
-                color = if(reis.actueelAankomstspoor != reis.geplandAankomstSpoor) Color.Red else Color.White,
+                color = if (reis.actueelAankomstspoor != reis.geplandAankomstSpoor) Color.Red else Color.White,
             )
         }
 

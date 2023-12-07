@@ -1,17 +1,20 @@
+# Configuratie
+Om de app te gebruiken is een NS-API key nodig met het profiel `NS-app`, die kan worden aangevraagd op https://apiportal.ns.nl/.
+De api-key moet worden toegevoegd in een `local.properties` file in dit format:
+
+````API_KEY_NS = ""````
+
 
 # Reisplanner app
 Een stand-alone app voor Wear Os om treinreizen te plannen binnen Nederland met alle treinvervoerders.
 De app in beschikbaar in het Nederlands en Engels (wordt op basis van systeemtaal geselecteerd).
 
 ##### Table of Contents
-- [Reisplanner app](#reisplanner-app)
-        - [Table of Contents](#table-of-contents)
-  - [Features](#features)
-    - [Thuisscherm](#thuisscherm)
-    - [Stationpicker](#stationpicker)
-    - [Reisadviezen](#reisadviezen)
-    - [Reisadvies detail](#reisadvies-detail)
-    - [Treinrit detail](#treinrit-detail)
+- [Features](#Features)  
+  - [Thuisscherm](#Thuisscherm)
+  - [Stations kiezen](#Stationpicker)
+  - [Reisadviezen](#Reisadvies-detail)
+  - [Trein Detail](#Treinrit-detail)
 
 ## Features
 Bijna alle functies vereisen een internetverbinding om gegevens op te halen. Voor één functie is een GPS-signaal nodig.
@@ -93,11 +96,6 @@ Als een reisadvies uit meerdere ritten bestaat (overstappen), worden de overstap
 
 - Overstaptijd
 - Vertrekspoor van de volgende trein
-
-Als laatste wordt de ritprijs en indien beschikbaar het aantal OV-fietsen getoond. Zie hieronder:
-
-![Screenshot_20230905_181415.png](demo/Screenshot_20230908_113552.png "Ritprijs en beschikbaarheid OV-fiets")
-![Screenshot_20230905_181415.png](demo/Screenshot_20230908_113730.png "Ritprijs en beschikbaarheid OV-fiets")
 
 In dit scherm kan de gebruiker de gegevens verversen door vanaf de bovenkant van het scherm naar beneden te vegen. Ook kan de gebruiker teruggaan naar het vorige scherm (het scherm met alle reisadviezen) met de terugknop op het horloge zelf. Het scherm opent op de plaats waar de gebruiker was gebleven. Dus als de gebruiker het onderste reisadvies heeft geselecteerd, opent het reisadviezenscherm ook daar.
 

@@ -50,7 +50,7 @@ data class RitDetail(
     val aankomstStationUicCode: String,
     val punctualiteit: Double,
 
-    val berichten: List<Message>,
+    val berichten: List<Message>?,
 
     val transferBericht: List<TransferMessage>?,
     val alternatiefVervoer: Boolean,

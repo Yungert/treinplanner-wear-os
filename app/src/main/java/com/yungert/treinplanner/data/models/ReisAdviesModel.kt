@@ -77,7 +77,7 @@ data class Leg(
     val product: Product,
     val sharedModality: SharedModality,
     val notes: List<Note>,
-    val messages: List<Message>,
+    val messages: List<Message>?,
     val transferMessages: List<TransferMessage>?,
     val stops: List<Stop>,
     val steps: List<Step>,
